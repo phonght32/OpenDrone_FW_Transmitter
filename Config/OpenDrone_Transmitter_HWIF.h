@@ -28,30 +28,33 @@ extern "C" {
 #endif
 
 #include "err_code.h"
+#include "nrf24l01.h"
+#include "joystick.h"
+#include "hd44780.h"
 #include "OpenDrone_Transmitter_Config.h"
 
 uint32_t hwif_get_time_us(void);
 void hwif_delay_ms(uint32_t time_ms);
 
 #ifdef USE_HD44780_2004
-err_code_t hwif_hd44780_i2c_send(uint8_t *buf_send, uint16_t len);
+hd44780_status_t hwif_hd44780_i2c_send(uint8_t *buf_send, uint16_t len);
 #endif
 
 #ifdef USE_JOYSTICK_MODULE
-err_code_t hwif_left_joystick_get_pos_x(uint16_t *pos_x);
-err_code_t hwif_left_joystick_get_pos_y(uint16_t *pos_y);
-err_code_t hwif_left_joystick_get_bt_status(uint8_t *bt_status);
-err_code_t hwif_right_joystick_get_pos_x(uint16_t *pos_x);
-err_code_t hwif_right_joystick_get_pos_y(uint16_t *pos_y);
-err_code_t hwif_right_joystick_get_bt_status(uint8_t *bt_status);
+joystick_status_t hwif_left_joystick_get_pos_x(uint16_t *pos_x);
+joystick_status_t hwif_left_joystick_get_pos_y(uint16_t *pos_y);
+joystick_status_t hwif_left_joystick_get_bt_status(uint8_t *bt_status);
+joystick_status_t hwif_right_joystick_get_pos_x(uint16_t *pos_x);
+joystick_status_t hwif_right_joystick_get_pos_y(uint16_t *pos_y);
+joystick_status_t hwif_right_joystick_get_bt_status(uint8_t *bt_status);
 #endif
 
 #ifdef USE_NRF24L01
-err_code_t hwif_nrf24l01_spi_send(uint8_t *buf_send, uint16_t len);
-err_code_t hwif_nrf24l01_spi_recv(uint8_t *buf_recv, uint16_t len);
-err_code_t hwif_nrf24l01_set_cs(uint8_t level);
-err_code_t hwif_nrf24l01_set_ce(uint8_t level);
-err_code_t hwif_nrf24l01_get_irq(uint8_t *level);
+nrf24l01_status_t hwif_nrf24l01_spi_send(uint8_t *buf_send, uint16_t len);
+nrf24l01_status_t hwif_nrf24l01_spi_recv(uint8_t *buf_recv, uint16_t len);
+nrf24l01_status_t hwif_nrf24l01_set_cs(uint8_t level);
+nrf24l01_status_t hwif_nrf24l01_set_ce(uint8_t level);
+nrf24l01_status_t hwif_nrf24l01_get_irq(uint8_t *level);
 #endif
 
 #ifdef USE_SX1278
