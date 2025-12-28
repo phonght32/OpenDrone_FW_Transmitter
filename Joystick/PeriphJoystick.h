@@ -20,8 +20,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#ifndef __PERIPH_H__
-#define __PERIPH_H__
+#ifndef __PERIPH_JOYSTICK_H__
+#define __PERIPH_JOYSTICK_H__
 
 #ifdef __cplusplus
 extern "C" {
@@ -36,20 +36,12 @@ typedef struct {
 	int16_t right_joystick_y;
 } periph_operator_data_t;
 
-err_code_t PeriphSensor_Init(void);
-err_code_t PeriphSensor_GetJoystickData(periph_operator_data_t *data);
-
-err_code_t PeriphRadio_Init(void);
-err_code_t PeriphRadio_Send(uint8_t *data);
-err_code_t PeriphRadio_ClearTransmitIrqFlags(void);
-
-err_code_t PeriphDisplay_Init(void);
-err_code_t PeriphDisplay_ShowJoystickData(int16_t left_joystick_x, int16_t left_joystick_y, int16_t right_joystick_x, int16_t right_joystick_y);
-err_code_t PeriphDisplay_ShowStabilizerMessage(int16_t throttle, int16_t roll, int16_t pitch, int16_t yaw);
+err_code_t PeriphJoystick_Init(void);
+err_code_t PeriphJoystick_GetData(periph_operator_data_t *data);
 
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* __PERIPH_H__ */
+#endif /* __PERIPH_JOYSTICK_H__ */

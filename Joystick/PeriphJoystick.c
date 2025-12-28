@@ -1,4 +1,4 @@
-#include "Periph.h"
+#include "PeriphJoystick.h"
 #include "OpenDrone_Transmitter_Define.h"
 #include "OpenDrone_Transmitter_HwIntf.h"
 #include "joystick.h"
@@ -8,7 +8,7 @@
 joystick_handle_t left_joystick_handle, right_joystick_handle;
 #endif
 
-err_code_t PeriphSensor_Init(void)
+err_code_t PeriphJoystick_Init(void)
 {
 #ifdef USE_JOYSTICK_MODULE
 	left_joystick_handle = joystick_init();
@@ -53,7 +53,7 @@ err_code_t PeriphSensor_Init(void)
 	return ERR_CODE_SUCCESS;
 }
 
-err_code_t PeriphSensor_GetJoystickData(periph_operator_data_t *data)
+err_code_t PeriphJoystick_GetData(periph_operator_data_t *data)
 {
 	int64_t sum_left_joystick_x = 0, sum_left_joystick_y = 0;
 	int64_t sum_right_joystick_x = 0, sum_right_joystick_y = 0;

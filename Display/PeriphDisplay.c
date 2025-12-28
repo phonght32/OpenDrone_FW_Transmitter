@@ -1,5 +1,4 @@
 #include "stdio.h"
-#include "Periph.h"
 #include "OpenDrone_Transmitter_Define.h"
 #include "OpenDrone_Transmitter_HwIntf.h"
 #include "hd44780.h"
