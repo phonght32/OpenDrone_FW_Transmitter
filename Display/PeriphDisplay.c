@@ -15,7 +15,7 @@ err_code_t PeriphDisplay_Init(void)
 	hd44780_cfg_t hd44780_cfg = {
 		.size = HD44780_SIZE_20_4,
 		.comm_mode = HD44780_COMM_MODE_I2C,
-		.i2c_send = hw_intf_hd44780_i2c_send,
+		.i2c_send = hwif_hd44780_i2c_send,
 		.delay = HAL_Delay
 	};
 	hd44780_set_config(hd44780_handle, hd44780_cfg);

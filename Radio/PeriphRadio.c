@@ -26,11 +26,11 @@ err_code_t PeriphRadio_Init(void)
 		.data_rate 			= CONFIG_NRF24L01_DATA_RATE,
 		.output_pwr 		= CONFIG_NRF24L01_OUTPUT_PWR,
 		.transceiver_mode 	= CONFIG_NRF24L01_TRANSCEIVER_MODE,
-		.spi_send 			= hw_intf_nrf24l01_spi_send,
-		.spi_recv 			= hw_intf_nrf24l01_spi_recv,
-		.set_cs 			= hw_intf_nrf24l01_set_cs,
-		.set_ce 			= hw_intf_nrf24l01_set_ce,
-		.get_irq 			= hw_intf_nrf24l01_get_irq,
+		.spi_send 			= hwif_nrf24l01_spi_send,
+		.spi_recv 			= hwif_nrf24l01_spi_recv,
+		.set_cs 			= hwif_nrf24l01_set_cs,
+		.set_ce 			= hwif_nrf24l01_set_ce,
+		.get_irq 			= hwif_nrf24l01_get_irq,
 		.delay 				= HAL_Delay
 	};
 	nrf24l01_set_config(nrf24l01_handle, nrf24l01_cfg);
@@ -48,11 +48,11 @@ err_code_t PeriphRadio_Init(void)
 		.coding_rate 		= CONFIG_SX1278_CODING_RATE,
 		.crc_en 			= CONFIG_SX1278_CRC_EN,
 		.transceiver_mode 	= CONFIG_SX1278_TRANSCEIVER_MODE,
-		.spi_send 			= hw_intf_sx1278_spi_send,
-		.spi_recv 			= hw_intf_sx1278_spi_recv,
-		.set_cs 			= hw_intf_sx1278_set_cs,
-		.set_rst 			= hw_intf_sx1278_set_rst,
-		.get_irq 			= hw_intf_sx1278_get_irq,
+		.spi_send 			= hwif_sx1278_spi_send,
+		.spi_recv 			= hwif_sx1278_spi_recv,
+		.set_cs 			= hwif_sx1278_set_cs,
+		.set_rst 			= hwif_sx1278_set_rst,
+		.get_irq 			= hwif_sx1278_get_irq,
 		.delay 				= HAL_Delay
 	};
 	sx1278_set_config(sx1278_handle, sx1278_cfg);
@@ -79,7 +79,7 @@ err_code_t PeriphRadio_ClearTransmitIrqFlags(void)
 {
 	uint8_t irq_level;
 #ifdef USE_NRF24L01
-	hw_intf_nrf24l01_get_irq(&irq_level);
+	hwif_nrf24l01_get_irq(&irq_level);
 
 	if (irq_level == NRF24L01_IRQ_ACTIVE_LEVEL)
 	{
@@ -88,7 +88,7 @@ err_code_t PeriphRadio_ClearTransmitIrqFlags(void)
 #endif
 
 #ifdef USE_SX1278
-	hw_intf_sx1278_get_irq(&irq_level);
+	hwif_sx1278_get_irq(&irq_level);
 
 	if (irq_level == SX1278_IRQ_ACTIVE_LEVEL)
 	{

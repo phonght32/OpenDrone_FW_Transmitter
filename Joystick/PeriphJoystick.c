@@ -23,9 +23,9 @@ err_code_t PeriphJoystick_Init(void)
 		.min_scale_y 			= 0,
 		.max_scale_y 			= 1000,
 		.inverse_y 				= 1,
-		.get_pos_x 				= hw_intf_left_joystick_get_pos_x,
-		.get_pos_y 				= hw_intf_left_joystick_get_pos_y,
-		.get_button 			= hw_intf_left_joystick_get_bt_status,
+		.get_pos_x 				= hwif_left_joystick_get_pos_x,
+		.get_pos_y 				= hwif_left_joystick_get_pos_y,
+		.get_button 			= hwif_left_joystick_get_bt_status,
 	};
 	joystick_set_config(left_joystick_handle, left_joystick_cfg);
 	joystick_config(left_joystick_handle);
@@ -42,9 +42,9 @@ err_code_t PeriphJoystick_Init(void)
 		.min_scale_y 			= 0,
 		.max_scale_y 			= 1000,
 		.inverse_y 				= 0,
-		.get_pos_x 				= hw_intf_right_joystick_get_pos_x,
-		.get_pos_y 				= hw_intf_right_joystick_get_pos_y,
-		.get_button 			= hw_intf_right_joystick_get_bt_status,
+		.get_pos_x 				= hwif_right_joystick_get_pos_x,
+		.get_pos_y 				= hwif_right_joystick_get_pos_y,
+		.get_button 			= hwif_right_joystick_get_bt_status,
 	};
 	joystick_set_config(right_joystick_handle, right_joystick_cfg);
 	joystick_config(right_joystick_handle);

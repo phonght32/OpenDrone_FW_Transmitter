@@ -43,7 +43,7 @@ err_code_t OpenDrone_Transmitter_Init(void)
 
 err_code_t OpenDrone_Transmitter_Main(void)
 {
-	uint32_t current_time = hw_intf_get_time_us();
+	uint32_t current_time = hwif_get_time_us();
 
 	/* Task 500 Hz */
 	if ((current_time - last_time_us[IDX_TASK_500_HZ]) > FREQ_500_HZ_TIME_US)
