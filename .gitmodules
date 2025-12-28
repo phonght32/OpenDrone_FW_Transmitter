@@ -7,3 +7,9 @@
 [submodule "Display/Driver/hd44780"]
 	path = Display/Driver/hd44780
 	url = https://github.com/phonght32/hd44780
+[submodule "Radio/Sensor/sx1278"]
+	path = Radio/Sensor/sx1278
+	url = git@github.com:phonght32/sx1278.git
+[submodule "Radio/Sensor/nrf24l01"]
+	path = Radio/Sensor/nrf24l01
+	url = https://github.com/phonght32/nrf24l01
