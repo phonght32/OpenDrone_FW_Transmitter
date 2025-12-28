@@ -12,7 +12,7 @@ nrf24l01_handle_t nrf24l01_handle;
 sx1278_handle_t sx1278_handle;
 #endif
 
-err_code_t PeriphRadio_Init(void)
+void PeriphRadio_Init(void)
 {
 #ifdef USE_NRF24L01
 	nrf24l01_handle = nrf24l01_init();
@@ -31,7 +31,7 @@ err_code_t PeriphRadio_Init(void)
 		.set_cs 			= hwif_nrf24l01_set_cs,
 		.set_ce 			= hwif_nrf24l01_set_ce,
 		.get_irq 			= hwif_nrf24l01_get_irq,
-		.delay 				= HAL_Delay
+		.delay 				= hwif_delay_ms
 	};
 	nrf24l01_set_config(nrf24l01_handle, nrf24l01_cfg);
 	nrf24l01_config(nrf24l01_handle);
@@ -58,11 +58,9 @@ err_code_t PeriphRadio_Init(void)
 	sx1278_set_config(sx1278_handle, sx1278_cfg);
 	sx1278_config(sx1278_handle);
 #endif
-
-	return ERR_CODE_SUCCESS;
 }
 
-err_code_t PeriphRadio_Send(uint8_t *data)
+void PeriphRadio_Send(uint8_t *data)
 {
 #ifdef USE_NRF24L01
 	nrf24l01_transmit(nrf24l01_handle, data);
@@ -71,11 +69,9 @@ err_code_t PeriphRadio_Send(uint8_t *data)
 #ifdef USE_SX1278
 	sx1278_lora_transmit(sx1278_handle, data);
 #endif
-
-	return ERR_CODE_SUCCESS;
 }
 
-err_code_t PeriphRadio_ClearTransmitIrqFlags(void)
+void PeriphRadio_ClearTransmitIrqFlags(void)
 {
 	uint8_t irq_level;
 #ifdef USE_NRF24L01
@@ -95,6 +91,4 @@ err_code_t PeriphRadio_ClearTransmitIrqFlags(void)
 		sx1278_lora_clear_irq_flags(sx1278_handle);
 	}
 #endif
-
-	return ERR_CODE_SUCCESS;
 }

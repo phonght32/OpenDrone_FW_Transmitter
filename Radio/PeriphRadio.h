@@ -27,11 +27,11 @@
 extern "C" {
 #endif
 
-#include "err_code.h"
+#include "stdint.h"
 
-err_code_t PeriphRadio_Init(void);
-err_code_t PeriphRadio_Send(uint8_t *data);
-err_code_t PeriphRadio_ClearTransmitIrqFlags(void);
+void PeriphRadio_Init(void);
+void PeriphRadio_Send(uint8_t *data);
+void PeriphRadio_ClearTransmitIrqFlags(void);
 
 #ifdef __cplusplus
 }

@@ -27,7 +27,7 @@
 extern "C" {
 #endif
 
-#include "err_code.h"
+#include "stdint.h"
 
 typedef struct {
 	int16_t left_joystick_x;
@@ -36,8 +36,8 @@ typedef struct {
 	int16_t right_joystick_y;
 } periph_operator_data_t;
 
-err_code_t PeriphJoystick_Init(void);
-err_code_t PeriphJoystick_GetData(periph_operator_data_t *data);
+void PeriphJoystick_Init(void);
+void PeriphJoystick_GetData(periph_operator_data_t *data);
 
 
 #ifdef __cplusplus

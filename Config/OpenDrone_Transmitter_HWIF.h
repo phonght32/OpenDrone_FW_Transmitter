@@ -27,7 +27,6 @@
 extern "C" {
 #endif
 
-#include "err_code.h"
 #include "nrf24l01.h"
 #include "joystick.h"
 #include "hd44780.h"

@@ -27,11 +27,11 @@
 extern "C" {
 #endif
 
-#include "err_code.h"
+#include "stdint.h"
 
-err_code_t PeriphDisplay_Init(void);
-err_code_t PeriphDisplay_ShowJoystickData(int16_t left_joystick_x, int16_t left_joystick_y, int16_t right_joystick_x, int16_t right_joystick_y);
-err_code_t PeriphDisplay_ShowStabilizerMessage(int16_t throttle, int16_t roll, int16_t pitch, int16_t yaw);
+void PeriphDisplay_Init(void);
+void PeriphDisplay_ShowJoystickData(int16_t left_joystick_x, int16_t left_joystick_y, int16_t right_joystick_x, int16_t right_joystick_y);
+void PeriphDisplay_ShowStabilizerMessage(int16_t throttle, int16_t roll, int16_t pitch, int16_t yaw);
 
 #ifdef __cplusplus
 }

@@ -27,7 +27,6 @@
 extern "C" {
 #endif
 
-#include "err_code.h"
 
 #ifdef __cplusplus
 }

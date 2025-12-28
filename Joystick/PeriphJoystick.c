@@ -8,7 +8,7 @@
 joystick_handle_t left_joystick_handle, right_joystick_handle;
 #endif
 
-err_code_t PeriphJoystick_Init(void)
+void PeriphJoystick_Init(void)
 {
 #ifdef USE_JOYSTICK_MODULE
 	left_joystick_handle = joystick_init();
@@ -49,11 +49,9 @@ err_code_t PeriphJoystick_Init(void)
 	joystick_set_config(right_joystick_handle, right_joystick_cfg);
 	joystick_config(right_joystick_handle);
 #endif
-
-	return ERR_CODE_SUCCESS;
 }
 
-err_code_t PeriphJoystick_GetData(periph_operator_data_t *data)
+void PeriphJoystick_GetData(periph_operator_data_t *data)
 {
 	int64_t sum_left_joystick_x = 0, sum_left_joystick_y = 0;
 	int64_t sum_right_joystick_x = 0, sum_right_joystick_y = 0;
@@ -95,6 +93,4 @@ err_code_t PeriphJoystick_GetData(periph_operator_data_t *data)
 	data->left_joystick_y = left_joystick_y;
 	data->right_joystick_x = right_joystick_x;
 	data->right_joystick_y = right_joystick_y;
-
-	return ERR_CODE_SUCCESS;
 }

@@ -27,10 +27,8 @@
 extern "C" {
 #endif
 
-#include "err_code.h"
-
-err_code_t OpenDrone_Transmitter_Init(void);
-err_code_t OpenDrone_Transmitter_Main(void);
+void OpenDrone_Transmitter_Init(void);
+void OpenDrone_Transmitter_Main(void);
 
 #ifdef __cplusplus
 }

@@ -7,7 +7,7 @@
 hd44780_handle_t hd44780_handle;
 #endif
 
-err_code_t PeriphDisplay_Init(void)
+void PeriphDisplay_Init(void)
 {
 #ifdef USE_HD44780_2004
 	hd44780_handle = hd44780_init();
@@ -16,7 +16,7 @@ err_code_t PeriphDisplay_Init(void)
 		.size = HD44780_SIZE_20_4,
 		.comm_mode = HD44780_COMM_MODE_I2C,
 		.i2c_send = hwif_hd44780_i2c_send,
-		.delay = HAL_Delay
+		.delay = hwif_delay_ms
 	};
 	hd44780_set_config(hd44780_handle, hd44780_cfg);
 	hd44780_config(hd44780_handle);
@@ -27,10 +27,9 @@ err_code_t PeriphDisplay_Init(void)
 	hd44780_gotoxy(hd44780_handle, 1, 0);
 	hd44780_write_string(hd44780_handle, (uint8_t *)"OpenDroneTransmitter");
 #endif
-	return ERR_CODE_SUCCESS;
 }
 
-err_code_t PeriphDisplay_ShowJoystickData(int16_t left_joystick_x, int16_t left_joystick_y, int16_t right_joystick_x, int16_t right_joystick_y)
+void PeriphDisplay_ShowJoystickData(int16_t left_joystick_x, int16_t left_joystick_y, int16_t right_joystick_x, int16_t right_joystick_y)
 {
 #ifdef USE_HD44780_2004
 	uint8_t row_data[20];
@@ -45,11 +44,9 @@ err_code_t PeriphDisplay_ShowJoystickData(int16_t left_joystick_x, int16_t left_
 	hd44780_gotoxy(hd44780_handle, 1, 0);
 	hd44780_write_string(hd44780_handle, (uint8_t *)row_data);
 #endif
-
-	return ERR_CODE_SUCCESS;
 }
 
-err_code_t PeriphDisplay_ShowStabilizerMessage(int16_t throttle, int16_t roll, int16_t pitch, int16_t yaw)
+void PeriphDisplay_ShowStabilizerMessage(int16_t throttle, int16_t roll, int16_t pitch, int16_t yaw)
 {
 #ifdef USE_HD44780_2004
 	uint8_t row0_data[20];
@@ -76,6 +73,4 @@ err_code_t PeriphDisplay_ShowStabilizerMessage(int16_t throttle, int16_t roll, i
 	hd44780_gotoxy(hd44780_handle, 3, 0);
 	hd44780_write_string(hd44780_handle, (uint8_t *)row3_data);
 #endif
-
-	return ERR_CODE_SUCCESS;
 }
