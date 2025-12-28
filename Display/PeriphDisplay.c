@@ -1,6 +1,6 @@
 #include "stdio.h"
 #include "OpenDrone_Transmitter_Config.h"
-#include "OpenDrone_Transmitter_HwIntf.h"
+#include "OpenDrone_Transmitter_HWIF.h"
 #include "hd44780.h"
 
 #ifdef USE_HD44780_2004

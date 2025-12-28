@@ -1,6 +1,6 @@
 #include "PeriphRadio.h"
 #include "OpenDrone_Transmitter_Config.h"
-#include "OpenDrone_Transmitter_HwIntf.h"
+#include "OpenDrone_Transmitter_HWIF.h"
 #include "nrf24l01.h"
 #include "sx1278.h"
 

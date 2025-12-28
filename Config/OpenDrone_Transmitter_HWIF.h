@@ -20,8 +20,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#ifndef __OPENDRONE_TRANSMITTER_HWINTF_H__
-#define __OPENDRONE_TRANSMITTER_HWINTF_H__
+#ifndef __OPENDRONE_TRANSMITTER_HWIF_H__
+#define __OPENDRONE_TRANSMITTER_HWIF_H__
 
 #ifdef __cplusplus
 extern "C" {
@@ -66,4 +66,4 @@ err_code_t hw_intf_sx1278_get_irq(uint8_t *level);
 }
 #endif
 
-#endif /* __OPENDRONE_TRANSMITTER_HWINTF_H__ */
+#endif /* __OPENDRONE_TRANSMITTER_HWIF_H__ */

@@ -1,6 +1,6 @@
 #include "string.h"
 #include "OpenDrone_Transmitter.h"
-#include "OpenDrone_Transmitter_HwIntf.h"
+#include "OpenDrone_Transmitter_Config.h"
 #include "OpenDrone_TxProtocol.h"
 #include "PeriphRadio.h"
 #include "PeriphDisplay.h"
