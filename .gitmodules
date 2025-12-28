@@ -10,3 +10,6 @@
 [submodule "Joystick/Driver/joystick"]
 	path = Joystick/Driver/joystick
 	url = git@github.com:phonght32/joystick.git
+[submodule "Display/Driver/hd44780"]
+	path = Display/Driver/hd44780
+	url = https://github.com/phonght32/hd44780
