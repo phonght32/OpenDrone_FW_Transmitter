@@ -28,7 +28,7 @@ extern "C" {
 #endif
 
 #include "err_code.h"
-#include "OpenDrone_Transmitter_Define.h"
+#include "OpenDrone_Transmitter_Config.h"
 
 uint32_t hw_intf_get_time_us(void);
 void hw_intf_delay_ms(uint32_t time_ms);

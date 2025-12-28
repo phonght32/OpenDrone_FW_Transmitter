@@ -1,5 +1,5 @@
 #include "PeriphJoystick.h"
-#include "OpenDrone_Transmitter_Define.h"
+#include "OpenDrone_Transmitter_Config.h"
 #include "OpenDrone_Transmitter_HwIntf.h"
 #include "joystick.h"
 
