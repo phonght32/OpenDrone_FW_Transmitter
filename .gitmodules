@@ -1,6 +1,3 @@
-[submodule "Display/hd44780"]
-	path = Display/hd44780
-	url = git@github.com:phonght32/hd44780.git
 [submodule "Sensor/joystick"]
 	path = Sensor/joystick
 	url = git@github.com:phonght32/joystick.git
