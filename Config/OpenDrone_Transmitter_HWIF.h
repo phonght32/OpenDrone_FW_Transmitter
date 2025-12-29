@@ -28,6 +28,7 @@ extern "C" {
 #endif
 
 #include "nrf24l01.h"
+#include "sx1278.h"
 #include "joystick.h"
 #include "hd44780.h"
 #include "OpenDrone_Transmitter_Config.h"
@@ -57,11 +58,11 @@ nrf24l01_status_t hwif_nrf24l01_get_irq(uint8_t *level);
 #endif
 
 #ifdef USE_SX1278
-err_code_t hwif_sx1278_spi_send(uint8_t *buf_send, uint16_t len);
-err_code_t hwif_sx1278_spi_recv(uint8_t *buf_recv, uint16_t len);
-err_code_t hwif_sx1278_set_cs(uint8_t level);
-err_code_t hwif_sx1278_set_rst(uint8_t level);
-err_code_t hwif_sx1278_get_irq(uint8_t *level);
+sx1278_status_t hwif_sx1278_spi_send(uint8_t *buf_send, uint16_t len);
+sx1278_status_t hwif_sx1278_spi_recv(uint8_t *buf_recv, uint16_t len);
+sx1278_status_t hwif_sx1278_set_cs(uint8_t level);
+sx1278_status_t hwif_sx1278_set_rst(uint8_t level);
+sx1278_status_t hwif_sx1278_get_irq(uint8_t *level);
 #endif
 
 #ifdef __cplusplus
