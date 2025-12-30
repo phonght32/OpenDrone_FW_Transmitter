@@ -31,6 +31,7 @@ extern "C" {
 #include "sx1278.h"
 #include "joystick.h"
 #include "hd44780.h"
+#include "PeriphSwitch.h"
 #include "OpenDrone_Transmitter_Config.h"
 
 uint32_t hwif_get_time_us(void);
@@ -64,6 +65,15 @@ sx1278_status_t hwif_sx1278_set_cs(uint8_t level);
 sx1278_status_t hwif_sx1278_set_rst(uint8_t level);
 sx1278_status_t hwif_sx1278_get_irq(uint8_t *level);
 #endif
+
+PeriphSwitch_State_t hwif_switch1_get_state(void);
+PeriphSwitch_State_t hwif_switch2_get_state(void);
+PeriphSwitch_State_t hwif_switch3_get_state(void);
+PeriphSwitch_State_t hwif_switch4_get_state(void);
+PeriphSwitch_State_t hwif_switch5_get_state(void);
+PeriphSwitch_State_t hwif_switch6_get_state(void);
+PeriphSwitch_State_t hwif_switch7_get_state(void);
+PeriphSwitch_State_t hwif_switch8_get_state(void);
 
 #ifdef __cplusplus
 }

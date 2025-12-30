@@ -1,4 +1,5 @@
 #include "stdio.h"
+#include "PeriphDisplay.h"
 #include "OpenDrone_Transmitter_Config.h"
 #include "OpenDrone_Transmitter_HWIF.h"
 #include "hd44780.h"
@@ -29,48 +30,22 @@ void PeriphDisplay_Init(void)
 #endif
 }
 
-void PeriphDisplay_ShowJoystickData(int16_t left_joystick_x, int16_t left_joystick_y, int16_t right_joystick_x, int16_t right_joystick_y)
+void PeriphDisplay_ShowAll(PeriphJoystick_Data_t joystick, PeriphSwitch_State_t *switch_data)
 {
-#ifdef USE_HD44780_2004
-	uint8_t row_data[20];
-
-	hd44780_clear(hd44780_handle);
-
-	sprintf((char *)row_data, "X: %i Y: %i", left_joystick_x, left_joystick_y);
-	hd44780_gotoxy(hd44780_handle, 0, 0);
-	hd44780_write_string(hd44780_handle, (uint8_t *)row_data);
-
-	sprintf((char *)row_data, "X: %i Y: %0i", right_joystick_x, right_joystick_y);
-	hd44780_gotoxy(hd44780_handle, 1, 0);
-	hd44780_write_string(hd44780_handle, (uint8_t *)row_data);
-#endif
-}
-
-void PeriphDisplay_ShowStabilizerMessage(int16_t throttle, int16_t roll, int16_t pitch, int16_t yaw)
-{
-#ifdef USE_HD44780_2004
 	uint8_t row0_data[20];
 	uint8_t row1_data[20];
-	uint8_t row2_data[20];
-	uint8_t row3_data[20];
 
 	hd44780_clear(hd44780_handle);
 
-	sprintf((char *)row0_data, "throttle: %05.4i", throttle);
-	sprintf((char *)row1_data, "roll    : %05.4i", roll);
-	sprintf((char *)row2_data, "pitch   : %05.4i", pitch);
-	sprintf((char *)row3_data, "yaw     : %05.4i", yaw);
+	sprintf((char *)row0_data, "%04i %04i %04i %04i", joystick.left_x, joystick.left_y, joystick.right_x, joystick.right_y);
 
 	hd44780_gotoxy(hd44780_handle, 0, 0);
 	hd44780_write_string(hd44780_handle, (uint8_t *)row0_data);
 
+	sprintf((char *)row1_data, "%01u %01u %01u %01u %01u %01u %01u %01u",
+	        switch_data[0], switch_data[1], switch_data[2], switch_data[3],
+	        switch_data[4], switch_data[5], switch_data[6], switch_data[7]);
+
 	hd44780_gotoxy(hd44780_handle, 1, 0);
 	hd44780_write_string(hd44780_handle, (uint8_t *)row1_data);
-
-	hd44780_gotoxy(hd44780_handle, 2, 0);
-	hd44780_write_string(hd44780_handle, (uint8_t *)row2_data);
-
-	hd44780_gotoxy(hd44780_handle, 3, 0);
-	hd44780_write_string(hd44780_handle, (uint8_t *)row3_data);
-#endif
 }

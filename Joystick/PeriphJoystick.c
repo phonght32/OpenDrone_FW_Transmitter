@@ -51,7 +51,7 @@ void PeriphJoystick_Init(void)
 #endif
 }
 
-void PeriphJoystick_GetData(periph_operator_data_t *data)
+void PeriphJoystick_GetData(PeriphJoystick_Data_t *data)
 {
 	int64_t sum_left_joystick_x = 0, sum_left_joystick_y = 0;
 	int64_t sum_right_joystick_x = 0, sum_right_joystick_y = 0;
@@ -89,8 +89,8 @@ void PeriphJoystick_GetData(periph_operator_data_t *data)
 	}
 	right_joystick_y = sum_right_joystick_y / num_conversion;
 
-	data->left_joystick_x = left_joystick_x;
-	data->left_joystick_y = left_joystick_y;
-	data->right_joystick_x = right_joystick_x;
-	data->right_joystick_y = right_joystick_y;
+	data->left_x = left_joystick_x;
+	data->left_y = left_joystick_y;
+	data->right_x = right_joystick_x;
+	data->right_y = right_joystick_y;
 }

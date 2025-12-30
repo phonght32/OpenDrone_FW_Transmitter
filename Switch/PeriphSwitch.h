@@ -27,6 +27,27 @@
 extern "C" {
 #endif
 
+typedef enum 
+{
+    PERIPH_SWITCH_ID_1,
+    PERIPH_SWITCH_ID_2,
+    PERIPH_SWITCH_ID_3,
+    PERIPH_SWITCH_ID_4,
+    PERIPH_SWITCH_ID_5,
+    PERIPH_SWITCH_ID_6,
+    PERIPH_SWITCH_ID_7,
+    PERIPH_SWITCH_ID_8,
+    PERIPH_SWITCH_ID_MAX
+} PeriphSwitch_Id_t;
+
+typedef enum 
+{
+    PERIPH_SWITCH_STATE_OFF = 0,
+    PERIPH_SWITCH_STATE_ON,
+    PERIPH_SWITCH_STATE_MAX
+} PeriphSwitch_State_t;
+
+PeriphSwitch_State_t PeiphSwitch_GetState(PeriphSwitch_Id_t id);
 
 #ifdef __cplusplus
 }

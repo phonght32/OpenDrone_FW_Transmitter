@@ -28,10 +28,11 @@ extern "C" {
 #endif
 
 #include "stdint.h"
+#include "PeriphJoystick.h"
+#include "PeriphSwitch.h"
 
 void PeriphDisplay_Init(void);
-void PeriphDisplay_ShowJoystickData(int16_t left_joystick_x, int16_t left_joystick_y, int16_t right_joystick_x, int16_t right_joystick_y);
-void PeriphDisplay_ShowStabilizerMessage(int16_t throttle, int16_t roll, int16_t pitch, int16_t yaw);
+void PeriphDisplay_ShowAll(PeriphJoystick_Data_t joystick, PeriphSwitch_State_t *switch_data);
 
 #ifdef __cplusplus
 }

@@ -29,15 +29,16 @@ extern "C" {
 
 #include "stdint.h"
 
-typedef struct {
-	int16_t left_joystick_x;
-	int16_t left_joystick_y;
-	int16_t right_joystick_x;
-	int16_t right_joystick_y;
-} periph_operator_data_t;
+typedef struct 
+{
+	int16_t left_x;
+	int16_t left_y;
+	int16_t right_x;
+	int16_t right_y;
+} PeriphJoystick_Data_t;
 
 void PeriphJoystick_Init(void);
-void PeriphJoystick_GetData(periph_operator_data_t *data);
+void PeriphJoystick_GetData(PeriphJoystick_Data_t *data);
 
 
 #ifdef __cplusplus
