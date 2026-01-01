@@ -52,6 +52,13 @@ void PeriphDisplay_Refresh(void)
 		hd44780_gotoxy(hd44780_handle, 0, 1);
 		hd44780_write_string(hd44780_handle, (uint8_t *)"Arming ...");
 		break;
+	case PERIPH_SCREEN_STATE_SHOW_ARM_FAILED:
+		hd44780_clear(hd44780_handle);
+		hd44780_gotoxy(hd44780_handle, 0, 0);
+		hd44780_write_string(hd44780_handle, (uint8_t *)"ARMING FAILED!");
+		hd44780_gotoxy(hd44780_handle, 1, 0);
+		hd44780_write_string(hd44780_handle, (uint8_t *)"Release throttle");
+		break;
 	case PERIPH_SCREEN_STATE_SHOW_RUNNING:
 		hd44780_clear(hd44780_handle);
 		hd44780_gotoxy(hd44780_handle, 0, 5);

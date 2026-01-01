@@ -30,6 +30,7 @@ typedef enum
 	OPENDRONE_TRANSMITTER_MAINSTATE_WAITING_FOR_ARM,
 	OPENDRONE_TRANSMITTER_MAINSTATE_ARMMING,
 	OPENDRONE_TRANSMITTER_MAINSTATE_DISARMED,
+	OPENDRONE_TRANSMITTER_MAINSTATE_ARM_FAILED,
 	OPENDRONE_TRANSMITTER_MAINSTATE_RUNNING,
 } OpenDrone_Transmitter_MainState_t;
 
@@ -109,11 +110,23 @@ void OpenDrone_Transmitter_Main(void)
 			PeriphDisplay_SetState(PERIPH_SCREEN_STATE_SHOW_RUNNING);
 			main_state = OPENDRONE_TRANSMITTER_MAINSTATE_RUNNING;
 		}
+		else if (control_data.throttle > 30)
+		{
+			PeriphDisplay_SetState(PERIPH_SCREEN_STATE_SHOW_ARM_FAILED);
+			main_state = OPENDRONE_TRANSMITTER_MAINSTATE_ARM_FAILED;
+		}
 		else
 		{
 			OpenDrone_Transmitter_SendMessageArmDisarm(1);
 		}
 		
+		break;
+	case OPENDRONE_TRANSMITTER_MAINSTATE_ARM_FAILED:
+		if (true == _is_disarm())
+		{
+			PeriphDisplay_SetState(PERIPH_SCREEN_STATE_SHOW_WAITING_FOR_ARM);
+			main_state = OPENDRONE_TRANSMITTER_MAINSTATE_WAITING_FOR_ARM;
+		}
 		break;
 	case OPENDRONE_TRANSMITTER_MAINSTATE_RUNNING:
 		if (true == _is_disarm())
