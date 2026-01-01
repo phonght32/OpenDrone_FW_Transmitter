@@ -104,12 +104,16 @@ void OpenDrone_Transmitter_Main(void)
 		break;
 		
 	case OPENDRONE_TRANSMITTER_MAINSTATE_ARMMING:
-		OpenDrone_Transmitter_SendMessageArmDisarm(1);
 		if ((current_time - time_start_arming) > 3000000)
 		{
 			PeriphDisplay_SetState(PERIPH_SCREEN_STATE_SHOW_RUNNING);
 			main_state = OPENDRONE_TRANSMITTER_MAINSTATE_RUNNING;
 		}
+		else
+		{
+			OpenDrone_Transmitter_SendMessageArmDisarm(1);
+		}
+		
 		break;
 	case OPENDRONE_TRANSMITTER_MAINSTATE_RUNNING:
 		if (true == _is_disarm())
