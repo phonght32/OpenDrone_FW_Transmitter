@@ -31,8 +31,19 @@ extern "C" {
 #include "PeriphJoystick.h"
 #include "PeriphSwitch.h"
 
+typedef enum
+{
+    PERIPH_SCREEN_STATE_IDLE = 0,
+    PERIPH_SCREEN_STATE_SHOW_WELCOME,
+    PERIPH_SCREEN_STATE_SHOW_WAITING_FOR_ARM,
+    PERIPH_SCREEN_STATE_SHOW_ARMING,
+    PERIPH_SCREEN_STATE_SHOW_ARMING_DONE,
+    PERIPH_SCREEN_STATE_SHOW_RUNNING
+} PeriphScreen_State_t;
+
 void PeriphDisplay_Init(void);
-void PeriphDisplay_ShowAll(PeriphJoystick_Data_t joystick, PeriphSwitch_State_t *switch_data);
+void PeriphDisplay_SetState(PeriphScreen_State_t state);
+void PeriphDisplay_Refresh(void);
 
 #ifdef __cplusplus
 }
