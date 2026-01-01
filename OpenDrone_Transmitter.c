@@ -8,17 +8,19 @@
 #include "PeriphJoystick.h"
 
 
-#define FREQ_500_HZ_TIME_US         FREQ_HZ_TO_TIME_US(500)
-#define FREQ_50_HZ_TIME_US          FREQ_HZ_TO_TIME_US(50)
-#define FREQ_30_HZ_TIME_US          FREQ_HZ_TO_TIME_US(30)
-#define FREQ_10_HZ_TIME_US          FREQ_HZ_TO_TIME_US(10)
-#define FREQ_5_HZ_TIME_US           FREQ_HZ_TO_TIME_US(5)
-
 #define INDEX_SWITCH_ARM_1     		0
 #define INDEX_SWITCH_ARM_2      	1
 
 #define TIME_SHOW_INFO_US 	  		2000000
 #define TIMEUS_SCREEN_UPDATE 		500000
+
+typedef struct 
+{
+	int16_t throttle;
+	int16_t roll;
+	int16_t pitch;
+	int16_t yaw;
+} OpenDrone_Transmitter_ControlData_t;
 
 typedef enum 
 {
@@ -34,11 +36,11 @@ uint32_t current_time = 0;
 uint32_t time_init_done = 0;
 uint32_t time_start_arming = 0;
 uint32_t time_last_screen_update = 0;
-PeriphJoystick_Data_t periph_operator_data = {0};
+
 OpenDrone_TxProtocolMsg_t OpenDrone_TxProtocolMsg = {0};
 PeriphSwitch_State_t switch_state[PERIPH_SWITCH_ID_MAX] = {0};
-int16_t joystick_data[4] = {0};
 OpenDrone_Transmitter_MainState_t main_state = OPENDRONE_TRANSMITTER_MAINSTATE_IDLE;
+OpenDrone_Transmitter_ControlData_t control_data = {0};
 
 static void OpenDrone_UpdateData(void);
 static void OpenDrone_Transmitter_InitMessage(void);
@@ -157,10 +159,10 @@ static void OpenDrone_Transmitter_SendMessageStabilizer(void)
 	OpenDrone_TxProtocolMsg.DesId = 0x41;
 	OpenDrone_TxProtocolMsg.MsgId = OPENDRONE_TXPROTOCOLMSG_ID_STABILIZER_CONTROL;
 	OpenDrone_TxProtocolMsg.Crc = 0x00;
-	OpenDrone_TxProtocolMsg.Payload.StabilizerCtrl.throttle = periph_operator_data.left_y;
-	OpenDrone_TxProtocolMsg.Payload.StabilizerCtrl.roll = periph_operator_data.right_x;
-	OpenDrone_TxProtocolMsg.Payload.StabilizerCtrl.pitch = periph_operator_data.right_y;
-	OpenDrone_TxProtocolMsg.Payload.StabilizerCtrl.yaw = periph_operator_data.left_x;
+	OpenDrone_TxProtocolMsg.Payload.StabilizerCtrl.throttle = control_data.throttle;
+	OpenDrone_TxProtocolMsg.Payload.StabilizerCtrl.roll = control_data.roll;
+	OpenDrone_TxProtocolMsg.Payload.StabilizerCtrl.pitch = control_data.pitch;
+	OpenDrone_TxProtocolMsg.Payload.StabilizerCtrl.yaw = control_data.yaw;
 
 	PeriphRadio_Send((uint8_t *)&OpenDrone_TxProtocolMsg);
 }
@@ -184,10 +186,17 @@ static void OpenDrone_Transmitter_SendMessageArmDisarm(uint8_t arm)
 
 static void OpenDrone_UpdateData(void)
 {
+	PeriphJoystick_Data_t joystick_data = {0};
+
 	for (uint8_t switch_index = 0; switch_index < PERIPH_SWITCH_ID_MAX; switch_index++)
 	{
 		switch_state[switch_index] = PeiphSwitch_GetState(switch_index);
 	}
 
-	PeriphJoystick_GetData(&periph_operator_data);
+	PeriphJoystick_GetData(&joystick_data);
+
+	control_data.throttle = joystick_data.left_y;
+	control_data.roll = joystick_data.right_x;	
+	control_data.pitch = joystick_data.right_y;
+	control_data.yaw = joystick_data.left_x;
 }
