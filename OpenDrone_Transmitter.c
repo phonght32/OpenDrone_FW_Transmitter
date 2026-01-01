@@ -1,4 +1,5 @@
 #include "string.h"
+#include "stdbool.h"
 #include "OpenDrone_Transmitter.h"
 #include "OpenDrone_Transmitter_Config.h"
 #include "OpenDrone_Transmitter_HWIF.h"
@@ -47,6 +48,16 @@ static void OpenDrone_Transmitter_InitMessage(void);
 static void OpenDrone_Transmitter_SendMessageStabilizer(void);
 static void OpenDrone_Transmitter_SendMessageArmDisarm(uint8_t arm);
 
+static bool _is_arm(void) 
+{
+	return (switch_state[INDEX_SWITCH_ARM_1] == PERIPH_SWITCH_STATE_ON) && (switch_state[INDEX_SWITCH_ARM_2] == PERIPH_SWITCH_STATE_ON);
+}
+
+static bool _is_disarm(void) 
+{
+	return (switch_state[INDEX_SWITCH_ARM_1] == PERIPH_SWITCH_STATE_OFF) && (switch_state[INDEX_SWITCH_ARM_2] == PERIPH_SWITCH_STATE_OFF);
+}
+
 
 void OpenDrone_Transmitter_Init(void)
 {
@@ -84,7 +95,7 @@ void OpenDrone_Transmitter_Main(void)
 		break;
 
 	case OPENDRONE_TRANSMITTER_MAINSTATE_WAITING_FOR_ARM:
-		if ((switch_state[INDEX_SWITCH_ARM_1] == PERIPH_SWITCH_STATE_ON) && (switch_state[INDEX_SWITCH_ARM_2] == PERIPH_SWITCH_STATE_ON))
+		if (true == _is_arm())
 		{
 			PeriphDisplay_SetState(PERIPH_SCREEN_STATE_SHOW_ARMING);
 			main_state = OPENDRONE_TRANSMITTER_MAINSTATE_ARMMING;
@@ -101,7 +112,7 @@ void OpenDrone_Transmitter_Main(void)
 		}
 		break;
 	case OPENDRONE_TRANSMITTER_MAINSTATE_RUNNING:
-		if ((switch_state[INDEX_SWITCH_ARM_1] == PERIPH_SWITCH_STATE_OFF) && (switch_state[INDEX_SWITCH_ARM_2] == PERIPH_SWITCH_STATE_OFF))
+		if (true == _is_disarm())
 		{
 			main_state = OPENDRONE_TRANSMITTER_MAINSTATE_DISARMED;
 			OpenDrone_Transmitter_SendMessageArmDisarm(0);
@@ -114,7 +125,7 @@ void OpenDrone_Transmitter_Main(void)
 		break;
 
 	case OPENDRONE_TRANSMITTER_MAINSTATE_DISARMED:
-		if ((switch_state[INDEX_SWITCH_ARM_1] == PERIPH_SWITCH_STATE_ON) && (switch_state[INDEX_SWITCH_ARM_2] == PERIPH_SWITCH_STATE_ON))
+		if (true == _is_arm())
 		{
 			PeriphDisplay_SetState(PERIPH_SCREEN_STATE_SHOW_ARMING);
 			main_state = OPENDRONE_TRANSMITTER_MAINSTATE_ARMMING;
