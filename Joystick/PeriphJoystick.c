@@ -14,7 +14,7 @@ void PeriphJoystick_Init(void)
 	left_joystick_handle = joystick_init();
 	joystick_cfg_t left_joystick_cfg = {
 		.min_acceptable_raw_x 	= 500,
-		.max_acceptable_raw_x 	= 2508,
+		.max_acceptable_raw_x 	= 2504,
 		.min_scale_x 			= 0,
 		.max_scale_x 			= 1000,
 		.inverse_x 				= 0,
