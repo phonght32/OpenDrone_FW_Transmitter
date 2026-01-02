@@ -1,4 +1,5 @@
 #include "stdio.h"
+#include "string.h"
 #include "PeriphDisplay.h"
 #include "OpenDrone_Transmitter_Config.h"
 #include "OpenDrone_Transmitter_HWIF.h"
@@ -9,6 +10,8 @@ hd44780_handle_t hd44780_handle;
 #endif
 
 PeriphScreen_State_t screen_state = PERIPH_SCREEN_STATE_IDLE;
+static PeriphSwitch_State_t info_switch[PERIPH_SWITCH_ID_MAX] = {0};
+static PeriphJoystick_Data_t info_joystick = {0};
 
 void PeriphDisplay_Init(void)
 {
@@ -60,34 +63,36 @@ void PeriphDisplay_Refresh(void)
 		hd44780_write_string(hd44780_handle, (uint8_t *)"Release throttle");
 		break;
 	case PERIPH_SCREEN_STATE_SHOW_RUNNING:
+		uint8_t row0_data[20];
+		uint8_t row1_data[20];
+
 		hd44780_clear(hd44780_handle);
-		hd44780_gotoxy(hd44780_handle, 0, 5);
-		hd44780_write_string(hd44780_handle, (uint8_t *)"Running");
+
+		sprintf((char *)row0_data, "%04i %04i %04i %04i",info_joystick.left_x, info_joystick.left_y, info_joystick.right_x, info_joystick.right_y);
+
+		hd44780_gotoxy(hd44780_handle, 0, 0);
+		hd44780_write_string(hd44780_handle, (uint8_t *)row0_data);
+
+		sprintf((char *)row1_data, "%01u %01u %01u %01u %01u %01u %01u %01u",
+				info_switch[0], info_switch[1], info_switch[2], info_switch[3],
+				info_switch[4], info_switch[5], info_switch[6], info_switch[7]);
+
+		hd44780_gotoxy(hd44780_handle, 1, 0);
+		hd44780_write_string(hd44780_handle, (uint8_t *)row1_data);
 		break;
 	default:
 		break;
 	}
 }
 
-
+void PeriphDisplay_UpdateData(PeriphSwitch_State_t* switch_state, PeriphJoystick_Data_t* joystick_data)
+{
+	memcpy(info_switch, switch_state, sizeof(PeriphSwitch_State_t) * PERIPH_SWITCH_ID_MAX);
+	memcpy(&info_joystick, joystick_data, sizeof(PeriphJoystick_Data_t));
+}
 
 
 // void PeriphDisplay_ShowAll(PeriphJoystick_Data_t joystick, PeriphSwitch_State_t *switch_data)
 // {
-// 	uint8_t row0_data[20];
-// 	uint8_t row1_data[20];
 
-// 	hd44780_clear(hd44780_handle);
-
-// 	sprintf((char *)row0_data, "%04i %04i %04i %04i", joystick.left_x, joystick.left_y, joystick.right_x, joystick.right_y);
-
-// 	hd44780_gotoxy(hd44780_handle, 0, 0);
-// 	hd44780_write_string(hd44780_handle, (uint8_t *)row0_data);
-
-// 	sprintf((char *)row1_data, "%01u %01u %01u %01u %01u %01u %01u %01u",
-// 	        switch_data[0], switch_data[1], switch_data[2], switch_data[3],
-// 	        switch_data[4], switch_data[5], switch_data[6], switch_data[7]);
-
-// 	hd44780_gotoxy(hd44780_handle, 1, 0);
-// 	hd44780_write_string(hd44780_handle, (uint8_t *)row1_data);
 // }

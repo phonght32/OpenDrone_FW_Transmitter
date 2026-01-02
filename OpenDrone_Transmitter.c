@@ -227,4 +227,6 @@ static void OpenDrone_UpdateData(void)
 	control_data.roll = joystick_data.right_x;	
 	control_data.pitch = joystick_data.right_y;
 	control_data.yaw = joystick_data.left_x;
+
+	PeriphDisplay_UpdateData(switch_state, &joystick_data);
 }

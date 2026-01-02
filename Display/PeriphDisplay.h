@@ -44,6 +44,7 @@ typedef enum
 
 void PeriphDisplay_Init(void);
 void PeriphDisplay_SetState(PeriphScreen_State_t state);
+void PeriphDisplay_UpdateData(PeriphSwitch_State_t* switch_state, PeriphJoystick_Data_t* joystick_data);
 void PeriphDisplay_Refresh(void);
 
 #ifdef __cplusplus
