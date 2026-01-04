@@ -13,38 +13,36 @@ void PeriphJoystick_Init(void)
 #ifdef USE_JOYSTICK_MODULE
 	left_joystick_handle = joystick_init();
 	joystick_cfg_t left_joystick_cfg = {
-		.min_acceptable_raw_x 	= 500,
-		.max_acceptable_raw_x 	= 2504,
+		.min_raw_x 				= 500,
+		.max_raw_x 				= 2504,
 		.min_scale_x 			= 0,
 		.max_scale_x 			= 1000,
 		.inverse_x 				= 0,
-		.min_acceptable_raw_y 	= 1090,
-		.max_acceptable_raw_y 	= 2790,
+		.min_raw_y 				= 1090,
+		.max_raw_y 				= 2790,
 		.min_scale_y 			= 0,
 		.max_scale_y 			= 1000,
 		.inverse_y 				= 1,
 		.get_pos_x 				= hwif_left_joystick_get_pos_x,
 		.get_pos_y 				= hwif_left_joystick_get_pos_y,
-		.get_button 			= hwif_left_joystick_get_bt_status,
 	};
 	joystick_set_config(left_joystick_handle, left_joystick_cfg);
 	joystick_config(left_joystick_handle);
 
 	right_joystick_handle = joystick_init();
 	joystick_cfg_t right_joystick_cfg = {
-		.min_acceptable_raw_x 	= 1568,
-		.max_acceptable_raw_x 	= 3510,
+		.min_raw_x 				= 1568,
+		.max_raw_x 				= 3510,
 		.min_scale_x 			= 0,
 		.max_scale_x 			= 1000,
 		.inverse_x 				= 1,
-		.min_acceptable_raw_y 	= 1270,
-		.max_acceptable_raw_y 	= 2790,
+		.min_raw_y 				= 1270,
+		.max_raw_y 				= 2790,
 		.min_scale_y 			= 0,
 		.max_scale_y 			= 1000,
 		.inverse_y 				= 0,
 		.get_pos_x 				= hwif_right_joystick_get_pos_x,
 		.get_pos_y 				= hwif_right_joystick_get_pos_y,
-		.get_button 			= hwif_right_joystick_get_bt_status,
 	};
 	joystick_set_config(right_joystick_handle, right_joystick_cfg);
 	joystick_config(right_joystick_handle);
